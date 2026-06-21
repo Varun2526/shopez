@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { ShoppingCart, User, Package, LogOut, LayoutDashboard } from 'lucide-react';
 import { AppProvider, useAppContext } from './Context';
+import Orders from './pages/Orders';
+import Admin from './pages/Admin';
 
 // --- COMPONENTS ---
 
@@ -173,8 +175,8 @@ const AppContent = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Auth />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/orders" element={<div className="container mt-8 text-center">Orders History (Coming Soon)</div>} />
-        <Route path="/admin" element={<div className="container mt-8 text-center">Admin Dashboard (Coming Soon)</div>} />
+        <Route path="/orders" element={<Orders />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </BrowserRouter>
   );
