@@ -20,7 +20,7 @@ const Cart = () => {
           </div>
         ))}
         <div className="mt-4" style={{ textAlign: 'right' }}>
-          <button className="btn btn-primary">Proceed to Checkout (Mock)</button>
+          <Link to="/checkout" className="btn btn-primary" style={{ display: 'inline-block' }}>Proceed to Checkout</Link>
         </div>
       </div>
     </div>
