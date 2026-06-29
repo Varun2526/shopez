@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAppContext } from '../Context';
+import CartItem from '../components/CartItem';
 
 const Cart = () => {
   const { cart, user } = useAppContext();
@@ -12,12 +13,7 @@ const Cart = () => {
       <h2>Your Cart</h2>
       <div className="glass-card animate-fade-in mt-4">
         {cart.products.map((item, idx) => (
-          <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem 0', borderBottom: '1px solid var(--border-color)' }}>
-            <div>
-              <h4 style={{ margin: 0 }}>{item.name || `Product ID: ${item.productId}`}</h4>
-              <p className="text-muted">Quantity: {item.quantity}</p>
-            </div>
-          </div>
+          <CartItem key={idx} item={item} />
         ))}
         <div className="mt-4" style={{ textAlign: 'right' }}>
           <Link to="/checkout" className="btn btn-primary" style={{ display: 'inline-block' }}>Proceed to Checkout</Link>
