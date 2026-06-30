@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppProvider } from './Context';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
+import Search from './pages/Search';
 import ProductDetail from './pages/ProductDetail';
 import Auth from './pages/Auth';
 import Cart from './pages/Cart';
@@ -17,6 +18,7 @@ const AppContent = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/search" element={<Search />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/login" element={<Auth />} />
         <Route path="/cart" element={<Cart />} />

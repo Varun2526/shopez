@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ShoppingCart, User, Package, LogOut, LayoutDashboard } from 'lucide-react';
 import { useAppContext } from '../Context';
+import SearchBar from './SearchBar';
 
 const Navbar = () => {
   const { user, cart, logout } = useAppContext();
@@ -9,6 +10,9 @@ const Navbar = () => {
   return (
     <nav style={{ padding: '1rem 2rem', background: 'var(--bg-glass)', backdropFilter: 'blur(10px)', borderBottom: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 100 }}>
       <Link to="/" style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>ShopEZ</Link>
+      
+      <SearchBar />
+      
       <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
         <Link to="/cart" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <ShoppingCart size={20} /> Cart ({cartItemCount})
