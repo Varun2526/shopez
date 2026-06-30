@@ -6,11 +6,18 @@ const SearchBar = () => {
   const [keyword, setKeyword] = useState('');
   const navigate = useNavigate();
 
+  const handleChange = (e) => {
+    const val = e.target.value;
+    setKeyword(val);
+    if (val.trim()) {
+      navigate(`/search?q=${encodeURIComponent(val)}`);
+    }
+  };
+
   const handleSearch = (e) => {
     e.preventDefault();
     if (keyword.trim()) {
       navigate(`/search?q=${encodeURIComponent(keyword)}`);
-      setKeyword('');
     }
   };
 
@@ -20,7 +27,7 @@ const SearchBar = () => {
         type="text" 
         placeholder="Search products..." 
         value={keyword}
-        onChange={(e) => setKeyword(e.target.value)}
+        onChange={handleChange}
         style={{ border: 'none', background: 'transparent', color: 'var(--text-primary)', outline: 'none', padding: '0.25rem 0.5rem', flexGrow: 1 }}
       />
       <button type="submit" style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '0.25rem' }}>

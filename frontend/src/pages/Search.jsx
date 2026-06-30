@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAppContext } from '../Context';
 import ProductCard from '../components/ProductCard';
@@ -10,21 +10,14 @@ const Search = () => {
   const query = searchParams.get('q') || '';
   
   const { products, loading } = useAppContext();
-  const [filteredProducts, setFilteredProducts] = useState([]);
-
-  useEffect(() => {
-    if (products.length > 0) {
-      if (query) {
-        const lowerQuery = query.toLowerCase();
-        setFilteredProducts(products.filter(p => 
-          p.name.toLowerCase().includes(lowerQuery) || 
-          p.description.toLowerCase().includes(lowerQuery) ||
-          p.category.toLowerCase().includes(lowerQuery)
-        ));
-      } else {
-        setFilteredProducts(products);
-      }
-    }
+  const filteredProducts = useMemo(() => {
+    if (!query) return products;
+    const lowerQuery = query.toLowerCase();
+    return products.filter(p => 
+      p.name.toLowerCase().includes(lowerQuery) || 
+      p.description.toLowerCase().includes(lowerQuery) ||
+      p.category.toLowerCase().includes(lowerQuery)
+    );
   }, [products, query]);
 
   if (loading) return <div className="container mt-8 text-center">Searching...</div>;
