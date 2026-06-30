@@ -70,3 +70,63 @@ export const authUser = async (req, res, next) => {
 export const logoutUser = (req, res) => {
     res.json({ message: 'User logged out successfully. Please clear your token on the client.' });
 };
+
+// @desc    Get user wishlist
+// @route   GET /api/users/wishlist
+// @access  Private
+export const getWishlist = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.user._id).populate('wishlist');
+        if (user) {
+            res.json(user.wishlist);
+        } else {
+            res.status(404);
+            throw new Error('User not found');
+        }
+    } catch (error) {
+        next(error);
+    }
+};
+
+// @desc    Add product to wishlist
+// @route   POST /api/users/wishlist
+// @access  Private
+export const addToWishlist = async (req, res, next) => {
+    try {
+        const { productId } = req.body;
+        const user = await User.findById(req.user._id);
+
+        if (user) {
+            if (!user.wishlist.includes(productId)) {
+                user.wishlist.push(productId);
+                await user.save();
+            }
+            res.json(user.wishlist);
+        } else {
+            res.status(404);
+            throw new Error('User not found');
+        }
+    } catch (error) {
+        next(error);
+    }
+};
+
+// @desc    Remove product from wishlist
+// @route   DELETE /api/users/wishlist/:productId
+// @access  Private
+export const removeFromWishlist = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.user._id);
+        
+        if (user) {
+            user.wishlist = user.wishlist.filter(id => id.toString() !== req.params.productId);
+            await user.save();
+            res.json(user.wishlist);
+        } else {
+            res.status(404);
+            throw new Error('User not found');
+        }
+    } catch (error) {
+        next(error);
+    }
+};

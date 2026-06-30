@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ShoppingCart, User, Package, LogOut, LayoutDashboard } from 'lucide-react';
+import { ShoppingCart, User, Package, LogOut, LayoutDashboard, Heart } from 'lucide-react';
 import { useAppContext } from '../Context';
 import SearchBar from './SearchBar';
 
@@ -19,6 +19,9 @@ const Navbar = () => {
         </Link>
         {user ? (
           <>
+            <Link to="/wishlist" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <Heart size={20} /> Wishlist
+            </Link>
             <Link to="/orders" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <Package size={20} /> Orders
             </Link>

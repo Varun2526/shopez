@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { Package, ArrowLeft } from 'lucide-react';
 import { useAppContext } from '../Context';
+import WishlistBtn from '../components/WishlistBtn';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -44,10 +45,15 @@ const ProductDetail = () => {
           )}
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', padding: '0 2rem' }}>
-          <span style={{ color: 'var(--accent-primary)', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '0.875rem', letterSpacing: '1px' }}>
-            {product.category}
-          </span>
-          <h1 style={{ fontSize: '3rem', margin: '0.5rem 0' }}>{product.name}</h1>
+          <div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+              <h1 style={{ margin: 0, fontSize: '2.5rem' }}>{product.name}</h1>
+              <WishlistBtn productId={product._id} />
+            </div>
+            <span style={{ display: 'inline-block', padding: '0.25rem 0.75rem', backgroundColor: 'var(--accent-primary)', color: '#000', borderRadius: 'var(--radius-full)', fontWeight: 'bold', marginBottom: '1.5rem' }}>
+              {product.category}
+            </span>
+          </div>
           <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', marginBottom: '2rem', lineHeight: '1.8' }}>
             {product.description}
           </p>
