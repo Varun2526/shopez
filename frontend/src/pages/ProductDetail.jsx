@@ -4,6 +4,8 @@ import axios from 'axios';
 import { Package, ArrowLeft } from 'lucide-react';
 import { useAppContext } from '../Context';
 import WishlistBtn from '../components/WishlistBtn';
+import Rating from '../components/Rating';
+import ProductReviews from '../components/ProductReviews';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -50,9 +52,12 @@ const ProductDetail = () => {
               <h1 style={{ margin: 0, fontSize: '2.5rem' }}>{product.name}</h1>
               <WishlistBtn productId={product._id} />
             </div>
-            <span style={{ display: 'inline-block', padding: '0.25rem 0.75rem', backgroundColor: 'var(--accent-primary)', color: '#000', borderRadius: 'var(--radius-full)', fontWeight: 'bold', marginBottom: '1.5rem' }}>
-              {product.category}
-            </span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+              <span style={{ display: 'inline-block', padding: '0.25rem 0.75rem', backgroundColor: 'var(--accent-primary)', color: '#000', borderRadius: 'var(--radius-full)', fontWeight: 'bold' }}>
+                {product.category}
+              </span>
+              <Rating value={product.rating} text={`${product.numReviews} reviews`} />
+            </div>
           </div>
           <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', marginBottom: '2rem', lineHeight: '1.8' }}>
             {product.description}
@@ -75,6 +80,8 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
+      
+      <ProductReviews product={product} setProduct={setProduct} />
     </div>
   );
 };

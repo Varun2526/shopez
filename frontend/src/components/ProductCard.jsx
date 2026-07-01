@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import WishlistBtn from './WishlistBtn';
+import Rating from './Rating';
 import { Package } from 'lucide-react';
 import { useAppContext } from '../Context';
 
@@ -22,7 +23,10 @@ const ProductCard = ({ product }) => {
         </div>
         <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
           <h3 style={{ marginBottom: '0.5rem', fontSize: '1.25rem' }}>{product.name}</h3>
-          <p style={{ color: 'var(--text-secondary)', flexGrow: 1, marginBottom: '1rem' }}>{product.description}</p>
+        <div style={{ marginBottom: '0.5rem' }}>
+          <Rating value={product.rating} text={`${product.numReviews} reviews`} />
+        </div>
+        <p style={{ color: 'var(--text-secondary)', flexGrow: 1, marginBottom: '1rem' }}>{product.description}</p>
         </div>
       </Link>
       
